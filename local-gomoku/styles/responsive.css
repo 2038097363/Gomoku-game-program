@@ -1,0 +1,55 @@
+@media (max-width: 900px) {
+  .hero {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .hero-status {
+    width: fit-content;
+  }
+
+  .game-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .side-panel {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .turn-card,
+  .settings-card,
+  .rules-note,
+  .actions {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 560px) {
+  .app-shell {
+    width: min(100% - 20px, 1180px);
+    padding: 18px 0;
+  }
+
+  h1 {
+    font-size: 44px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+  }
+
+  .board-frame {
+    padding: 8px;
+  }
+
+  .star {
+    width: 6px;
+    height: 6px;
+  }
+
+  .side-panel,
+  .stats-grid,
+  .actions {
+    grid-template-columns: 1fr;
+  }
+}

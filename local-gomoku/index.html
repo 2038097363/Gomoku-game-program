@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>&#20116;&#23376;&#26827;&#26412;&#22320;&#21452;&#20154;&#29256;</title>
+    <link rel="stylesheet" href="styles/base.css" />
+    <link rel="stylesheet" href="styles/layout.css" />
+    <link rel="stylesheet" href="styles/board.css" />
+    <link rel="stylesheet" href="styles/panel.css" />
+    <link rel="stylesheet" href="styles/responsive.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">Local Gomoku</p>
+          <h1>&#20116;&#23376;&#26827;</h1>
+          <p class="subtitle">&#26412;&#22320;&#21452;&#20154;&#23545;&#24328; · 15 &#36335;&#33258;&#30001;&#35268;&#21017; · &#20808;&#36830;&#20116;&#32773;&#32988;</p>
+        </div>
+        <div class="hero-status" aria-live="polite">
+          <span id="statusDot" class="status-dot black"></span>
+          <span id="headlineStatus">&#40657;&#26827;&#20808;&#25163;</span>
+        </div>
+      </section>
+
+      <section class="game-layout">
+        <div class="board-wrap" aria-label="&#20116;&#23376;&#26827;&#26827;&#30424;&#21306;&#22495;">
+          <div class="board-frame">
+            <div id="board" class="board" role="grid" aria-label="15&#20056;15&#20116;&#23376;&#26827;&#26827;&#30424;"></div>
+          </div>
+        </div>
+
+        <aside class="side-panel" aria-label="&#23545;&#23616;&#20449;&#24687;">
+          <div class="settings-card">
+            <span class="panel-label">&#23545;&#23616;&#27169;&#24335;</span>
+            <div class="segmented" role="group" aria-label="&#36873;&#25321;&#23545;&#23616;&#27169;&#24335;">
+              <button id="twoPlayerModeBtn" type="button" class="active">&#21452;&#20154;</button>
+              <button id="aiModeBtn" type="button">&#20154;&#26426;</button>
+            </div>
+            <div id="sidePicker" class="side-picker hidden">
+              <span class="panel-label">&#20320;&#26469;&#25191;&#23376;</span>
+              <div class="segmented" role="group" aria-label="&#36873;&#25321;&#25191;&#23376;&#39068;&#33394;">
+                <button id="humanBlackBtn" type="button" class="active">&#40657;&#26827;</button>
+                <button id="humanWhiteBtn" type="button">&#30333;&#26827;</button>
+              </div>
+            </div>
+            <div id="aiModelPicker" class="side-picker hidden">
+              <span class="panel-label">AI &#27169;&#22411;</span>
+              <div class="segmented ai-model-grid" role="group" aria-label="&#36873;&#25321;AI&#27169;&#22411;">
+                <button id="heuristicAiBtn" type="button" class="active">&#24555;&#36895;&#35268;&#21017;</button>
+                <button id="searchAiBtn" type="button">&#27973;&#23618;&#25628;&#32034;</button>
+                <button id="serverSearchAiBtn" type="button">&#19987;&#23478;&#25628;&#32034;</button>
+                <button id="serverCnnAiBtn" type="button">CNN &#27169;&#22411;</button>
+                <button id="serverHybridAiBtn" type="button">&#19987;&#23478;+CNN</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="turn-card">
+            <span class="panel-label">&#24403;&#21069;&#22238;&#21512;</span>
+            <div class="turn-player">
+              <span id="turnStone" class="mini-stone black"></span>
+              <strong id="turnText">&#40657;&#26827;</strong>
+            </div>
+            <p id="gameMessage">&#28857;&#20987;&#26827;&#30424;&#20132;&#21449;&#28857;&#33853;&#23376;&#12290;</p>
+          </div>
+
+          <div class="stats-grid">
+            <div>
+              <span class="panel-label">&#27493;&#25968;</span>
+              <strong id="moveCount">0</strong>
+            </div>
+            <div>
+              <span class="panel-label">&#31354;&#20301;</span>
+              <strong id="emptyCount">225</strong>
+            </div>
+          </div>
+
+          <div class="score-board">
+            <span class="panel-label">&#27604;&#20998;</span>
+            <div class="score-row">
+              <span><i class="mini-stone black"></i>&#40657;&#26827;</span>
+              <strong id="blackScore">0</strong>
+            </div>
+            <div class="score-row">
+              <span><i class="mini-stone white"></i>&#30333;&#26827;</span>
+              <strong id="whiteScore">0</strong>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button id="undoBtn" type="button">&#24724;&#26827;&#19968;&#27493;</button>
+            <button id="restartBtn" type="button" class="primary">&#37325;&#26032;&#24320;&#22987;</button>
+            <button id="saveTrainingBtn" type="button" class="wide">&#32435;&#20837;&#35757;&#32451;</button>
+          </div>
+
+          <div class="rules-note">
+            <span class="panel-label">&#35268;&#21017;</span>
+            <p>&#40657;&#26827;&#20808;&#25163;&#65292;&#21452;&#26041;&#36718;&#27969;&#33853;&#23376;&#12290;&#27178;&#12289;&#31446;&#25110;&#26012;&#21521;&#36830;&#32493;&#20116;&#39063;&#21516;&#33394;&#26827;&#23376;&#21363;&#33719;&#32988;&#12290;&#26412;&#22320;&#29256;&#26242;&#19981;&#35774;&#32622;&#31105;&#25163;&#12290;</p>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <script src="scripts/config.js"></script>
+    <script src="scripts/state.js"></script>
+    <script src="scripts/rules.js"></script>
+    <script src="scripts/ai.js"></script>
+    <script src="scripts/ui.js"></script>
+    <script src="scripts/main.js"></script>
+  </body>
+</html>

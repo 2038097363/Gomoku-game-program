@@ -1,0 +1,134 @@
+.board-wrap {
+  display: grid;
+  place-items: center;
+  min-width: 0;
+}
+
+.board-frame {
+  width: min(100%, 720px);
+  padding: clamp(12px, 2vw, 18px);
+  border: 1px solid rgba(122, 85, 45, 0.36);
+  border-radius: 8px;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.22), transparent 18%, rgba(85, 44, 15, 0.08) 52%, transparent),
+    linear-gradient(135deg, #e5b76e, #c98e43 58%, #e1b060);
+  box-shadow: var(--shadow);
+}
+
+.board {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(15, 1fr);
+  grid-template-rows: repeat(15, 1fr);
+  aspect-ratio: 1;
+  width: 100%;
+  border-radius: 4px;
+  overflow: hidden;
+  background:
+    linear-gradient(to right, transparent calc(50% - 0.5px), var(--line) calc(50% - 0.5px), var(--line) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
+    linear-gradient(to bottom, transparent calc(50% - 0.5px), var(--line) calc(50% - 0.5px), var(--line) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
+    repeating-linear-gradient(90deg, rgba(92, 53, 19, 0.08) 0 4px, transparent 4px 14px),
+    #dba65a;
+  background-size:
+    calc(100% / 15) 100%,
+    100% calc(100% / 15),
+    auto,
+    auto;
+  box-shadow: inset 0 0 0 2px rgba(102, 66, 30, 0.5);
+}
+
+.cell {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  aspect-ratio: 1;
+  padding: 0;
+  border: 0;
+  appearance: none;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.cell::before {
+  content: "";
+  width: 18%;
+  height: 18%;
+  border-radius: 999px;
+  opacity: 0;
+  background: rgba(47, 111, 94, 0.55);
+  transform: scale(0.8);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.cell.empty:hover::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.cell.disabled {
+  cursor: default;
+}
+
+.stone {
+  position: absolute;
+  width: 76%;
+  height: 76%;
+  border-radius: 999px;
+  transform: scale(0);
+  animation: placeStone 0.18s ease-out forwards;
+}
+
+.stone.black,
+.mini-stone.black,
+.status-dot.black {
+  background:
+    radial-gradient(circle at 33% 27%, #62645f 0 6%, #252722 24%, #080908 78%);
+}
+
+.stone.white,
+.mini-stone.white,
+.status-dot.white {
+  background:
+    radial-gradient(circle at 35% 28%, #ffffff 0 8%, #f3f0e8 38%, #c9c3b5 100%);
+  border: 1px solid rgba(72, 69, 62, 0.28);
+}
+
+.stone.last::after {
+  content: "";
+  position: absolute;
+  inset: 38%;
+  border-radius: 999px;
+  background: var(--gold);
+  box-shadow: 0 0 0 2px rgba(31, 35, 32, 0.14);
+}
+
+.stone.winning {
+  box-shadow:
+    0 0 0 4px rgba(247, 201, 72, 0.78),
+    0 0 20px rgba(247, 201, 72, 0.72);
+}
+
+.star {
+  position: absolute;
+  z-index: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(72, 45, 20, 0.72);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+@keyframes placeStone {
+  from {
+    transform: scale(0.72);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
